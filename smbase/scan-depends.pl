@@ -83,29 +83,23 @@ $quiet = 0;
 sub usage {
   print(<<"EOF");
 usage: $0 [options] sourcefile [sourcefile ...]
-
 This program reads each of the source files specified on the command
 line, and emits a graph of their interdependencies in the Dot graph
 file format.  The source files should *not* be qualified with a path,
 but instead be inside some directory specified with -I.
-
 Options:
   -I<dir>     Add <dir> to the list of directories to search when
               looking for \#included files (files which are included
               but not found are not printed as dependencies).
-
   -X<name>    Exclude module <name> from the graph.  If a number is
   -X<name>=n  specified, at most that many incoming links will be shown.
-
   -S<name>    Do not process any outgoing edges from module <name>.  This
               is useful when <name> is the entry point to a subsystem
               whose dependencies are charted separately.
-
   -r          Recursively follow dependencies for files encountered.
   -q          Suppress warnings.
   -d          Enable debug messages.
   -h,-help    Print this usage string.
-
 EOF
   exit(0);
 }
@@ -258,7 +252,7 @@ sub addNode {
       # I prefer headers to not have any delimiting shape; since I
       # don't see a way to turn off the shape altogether, I make
       # it white so it's effectively invisible
-      print("    color = white\n");
+      #print("    color = white\n");
     }
 
     print("  ]\n");
@@ -433,7 +427,6 @@ processArguments();
 print(<<"EOF");
 // dependency graph automatically produced by
 //   $0 $origArgs
-
 digraph "Dependencies" {
 EOF
 
@@ -456,4 +449,3 @@ while (@toExplore != 0) {
 print("}\n");
 
 exit(0);
-
